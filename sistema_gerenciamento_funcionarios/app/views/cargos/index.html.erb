@@ -1,2 +1,32 @@
-<h1>Cargos#index</h1>
-<p>Find me in app/views/cargos/index.html.erb</p>
+<h1>Cargos</h1>
+<%= link_to 'Novo Cargo', new_cargo_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Departamento</th>
+      <th>Nível</th>
+      <th>Salário Base</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cargos.each do |cargo| %>
+      <tr>
+        <td><%= cargo.nome %></td>
+        <td><%= cargo.descricao %></td>
+        <td><%= cargo.departamento.nome %></td>
+        <td><%= cargo.nivel %></td>
+        <td><%= number_to_currency(cargo.salario_base) %></td>
+        <td><%= cargo.status.humanize %></td>
+        <td>
+          <%= link_to 'Mostrar', cargo %> |
+          <%= link_to 'Editar', edit_cargo_path(cargo) %> |
+          <%= link_to 'Excluir', cargo, method: :delete, data: { confirm: 'Tem certeza?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

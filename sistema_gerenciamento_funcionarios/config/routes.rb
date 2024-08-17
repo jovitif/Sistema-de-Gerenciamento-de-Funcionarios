@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # root "funcionarios#index"
   resources :funcionarios
   resources :departamentos
+  resources :cargos
 
   get "/funcionarios", to: "funcionarios#index"
   get "/funcionarios/:id", to: "funcionarios#show"
