@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_17_112156) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_17_120940) do
+  create_table "cargos", force: :cascade do |t|
+    t.string "nome"
+    t.text "descricao"
+    t.integer "departamento_id", null: false
+    t.string "nivel"
+    t.decimal "salario_base", precision: 10, scale: 2
+    t.text "requisitos"
+    t.text "beneficios"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["departamento_id"], name: "index_cargos_on_departamento_id"
+  end
+
   create_table "departamentos", force: :cascade do |t|
     t.string "nome"
     t.text "descricao"
@@ -51,5 +65,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_17_112156) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "cargos", "departamentos"
   add_foreign_key "enderecos", "funcionarios"
 end
