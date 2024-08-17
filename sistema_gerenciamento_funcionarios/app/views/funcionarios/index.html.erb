@@ -3,36 +3,7 @@
 <ul>
   <% @funcionarios.each do |funcionario| %>
     <li>
-      <strong>Nome:</strong> <%= funcionario.nome_completo %><br>
-      <strong>Data de Nascimento:</strong> <%= funcionario.data_nascimento.strftime('%d/%m/%Y') %><br>
-      <strong>Gênero:</strong> <%= funcionario.genero %><br>
-      <strong>CPF:</strong> <%= funcionario.cpf %><br>
-      <strong>RG:</strong> <%= funcionario.rg %><br>
-      <strong>Telefone:</strong> <%= funcionario.telefone %><br>
-      <strong>E-mail:</strong> <%= funcionario.email %><br>
-      <strong>Cargo:</strong> <%= funcionario.cargo %><br>
-      <strong>Data de Contratação:</strong> <%= funcionario.data_contratacao.strftime('%d/%m/%Y') %><br>
-      <strong>Salário:</strong> <%= number_to_currency(funcionario.salario, unit: "R$") %><br>
-      <strong>Status:</strong> <%= funcionario.status %><br>
-
-      <h4>Endereços:</h4>
-      <% if funcionario.enderecos.any? %>
-        <ul>
-          <% funcionario.enderecos.each do |endereco| %>
-            <li>
-              <strong>Rua:</strong> <%= endereco.rua %>, 
-              <strong>Número:</strong> <%= endereco.numero %>, 
-              <strong>Complemento:</strong> <%= endereco.complemento %>, 
-              <strong>Bairro:</strong> <%= endereco.bairro %>, 
-              <strong>Cidade:</strong> <%= endereco.cidade %>, 
-              <strong>Estado:</strong> <%= endereco.estado %>, 
-              <strong>CEP:</strong> <%= endereco.cep %>
-            </li>
-          <% end %>
-        </ul>
-      <% else %>
-        <p>Sem endereço cadastrado.</p>
-      <% end %>
+      <a href="<%= funcionario_path(funcionario) %>"><%= funcionario.nome_completo %></a><br>    
     </li>
   <% end %>
 </ul>

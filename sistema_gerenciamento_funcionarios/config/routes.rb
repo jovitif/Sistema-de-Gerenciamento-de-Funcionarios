@@ -11,8 +11,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root "funcionarios#index"
+  # root "funcionarios#index"
+  resources :funcionarios
   get "/funcionarios", to: "funcionarios#index"
+  get "/funcionarios/:id", to: "funcionarios#show"
+
   get "/cargos", to: "cargos#index"
   get "/departamentos", to: "departamentos#index"
 end

@@ -1,0 +1,11 @@
+<strong>Nome:</strong> <%= @funcionario.nome_completo %> <br>
+<strong>Data de Nascimento:</strong> <%= @funcionario.data_nascimento.strftime('%d/%m/%Y') if @funcionario.data_nascimento %><br>
+<strong>Gênero:</strong> <%= @funcionario.genero %><br>
+<strong>CPF:</strong> <%= @funcionario.cpf %><br>
+<strong>RG:</strong> <%= @funcionario.rg %><br>
+<strong>Telefone:</strong> <%= @funcionario.telefone %><br>
+<strong>E-mail:</strong> <%= @funcionario.email %><br>
+<strong>Cargo:</strong> <%= @funcionario.cargo %><br>
+<strong>Data de Contratação:</strong> <%= @funcionario.data_contratacao.strftime('%d/%m/%Y') if @funcionario.data_contratacao %><br>
+<strong>Salário:</strong> <%= number_to_currency(@funcionario.salario, unit: "R$") %><br>
+<strong>Status:</strong> <%= @funcionario.status %><br>

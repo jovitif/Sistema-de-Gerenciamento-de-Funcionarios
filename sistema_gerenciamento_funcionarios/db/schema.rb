@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_16_003846) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_17_112156) do
+  create_table "departamentos", force: :cascade do |t|
+    t.string "nome"
+    t.text "descricao"
+    t.string "codigo"
+    t.string "localizacao"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "enderecos", force: :cascade do |t|
     t.string "rua"
     t.string "numero"
