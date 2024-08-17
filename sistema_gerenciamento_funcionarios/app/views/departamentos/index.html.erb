@@ -1,2 +1,30 @@
-<h1>Departamentos#index</h1>
-<p>Find me in app/views/departamentos/index.html.erb</p>
+<h1>Departamentos</h1>
+<%= link_to 'Novo Departamento', new_departamento_path %>
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Código</th>
+      <th>Localização</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @departamentos.each do |departamento| %>
+      <tr>
+        <td><%= departamento.nome %></td>
+        <td><%= departamento.descricao %></td>
+        <td><%= departamento.codigo %></td>
+        <td><%= departamento.localizacao %></td>
+        <td><%= departamento.status %></td>
+        <td>
+          <%= link_to 'Mostrar', departamento %> |
+          <%= link_to 'Editar', edit_departamento_path(departamento) %> |
+          <%= link_to 'Excluir', departamento, method: :delete, data: { confirm: 'Tem certeza?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

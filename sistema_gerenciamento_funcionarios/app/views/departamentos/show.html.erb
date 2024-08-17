@@ -1,0 +1,19 @@
+<h1><%= @departamento.nome %></h1>
+<p>
+  <strong>Descrição:</strong>
+  <%= @departamento.descricao %>
+</p>
+<p>
+  <strong>Código:</strong>
+  <%= @departamento.codigo %>
+</p>
+<p>
+  <strong>Localização:</strong>
+  <%= @departamento.localizacao %>
+</p>
+<p>
+  <strong>Status:</strong>
+  <%= @departamento.status %>
+</p>
+<%= link_to 'Editar', edit_departamento_path(@departamento) %> |
+<%= link_to 'Voltar', departamentos_path %>

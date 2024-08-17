@@ -1,0 +1,27 @@
+<h1>Novo Departamento</h1>
+<%= form_with(model: @departamento, local: true) do |form| %>
+  <div>
+    <%= form.label :nome %>
+    <%= form.text_field :nome %>
+  </div>
+  <div>
+    <%= form.label :descricao %>
+    <%= form.text_area :descricao %>
+  </div>
+  <div>
+    <%= form.label :codigo %>
+    <%= form.text_field :codigo %>
+  </div>
+  <div>
+    <%= form.label :localizacao %>
+    <%= form.text_field :localizacao %>
+  </div>
+  <div>
+    <%= form.label :status %>
+    <%= form.select :status, Departamento.statuses.keys.map { |s| [s.humanize, s] } %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+<%= link_to 'Voltar', departamentos_path %>
