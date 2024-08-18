@@ -1,11 +1,59 @@
-<strong>Nome:</strong> <%= @funcionario.nome_completo %> <br>
-<strong>Data de Nascimento:</strong> <%= @funcionario.data_nascimento.strftime('%d/%m/%Y') if @funcionario.data_nascimento %><br>
-<strong>Gênero:</strong> <%= @funcionario.genero %><br>
-<strong>CPF:</strong> <%= @funcionario.cpf %><br>
-<strong>RG:</strong> <%= @funcionario.rg %><br>
-<strong>Telefone:</strong> <%= @funcionario.telefone %><br>
-<strong>E-mail:</strong> <%= @funcionario.email %><br>
-<strong>Cargo:</strong> <%= @funcionario.cargo %><br>
-<strong>Data de Contratação:</strong> <%= @funcionario.data_contratacao.strftime('%d/%m/%Y') if @funcionario.data_contratacao %><br>
-<strong>Salário:</strong> <%= number_to_currency(@funcionario.salario, unit: "R$") %><br>
-<strong>Status:</strong> <%= @funcionario.status %><br>
+<h1>Funcionário: <%= @funcionario.nome_completo %></h1>
+
+<p>
+  <strong>Nome Completo:</strong>
+  <%= @funcionario.nome_completo %>
+</p>
+
+<p>
+  <strong>Data de Nascimento:</strong>
+  <%= @funcionario.data_nascimento %>
+</p>
+
+<p>
+  <strong>Gênero:</strong>
+  <%= @funcionario.genero %>
+</p>
+
+<p>
+  <strong>CPF:</strong>
+  <%= @funcionario.cpf %>
+</p>
+
+<p>
+  <strong>RG:</strong>
+  <%= @funcionario.rg %>
+</p>
+
+<p>
+  <strong>Telefone:</strong>
+  <%= @funcionario.telefone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @funcionario.email %>
+</p>
+
+<p>
+  <strong>Cargo:</strong>
+  <%= @funcionario.cargo.nome %> <!-- Supondo que o Cargo tem um atributo 'nome' -->
+</p>
+
+<p>
+  <strong>Data de Contratação:</strong>
+  <%= @funcionario.data_contratacao %>
+</p>
+
+<p>
+  <strong>Salário:</strong>
+  <%= number_to_currency(@funcionario.salario) %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @funcionario.status %>
+</p>
+
+<%= link_to 'Editar', edit_funcionario_path(@funcionario), class: 'btn btn-warning' %>
+<%= link_to 'Voltar', funcionarios_path, class: 'btn btn-secondary' %>

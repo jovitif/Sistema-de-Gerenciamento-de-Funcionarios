@@ -1,10 +1,38 @@
-<h1>Lista de Funcionários</h1>
+<h1>Funcionários</h1>
 
-<ul>
-  <% @funcionarios.each do |funcionario| %>
-    <li>
-      <a href="<%= funcionario_path(funcionario) %>"><%= funcionario.nome_completo %></a><br>    
-    </li>
-  <% end %>
-</ul>
+<%= link_to 'Novo Funcionário', new_funcionario_path, class: 'btn btn-primary' %>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome Completo</th>
+      <th>Data de Nascimento</th>
+      <th>Gênero</th>
+      <th>CPF</th>
+      <th>Telefone</th>
+      <th>Email</th>
+      <th>Cargo</th>
+      <th>Status</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @funcionarios.each do |funcionario| %>
+      <tr>
+        <td><%= funcionario.nome_completo %></td>
+        <td><%= funcionario.data_nascimento %></td>
+        <td><%= funcionario.genero %></td>
+        <td><%= funcionario.cpf %></td>
+        <td><%= funcionario.telefone %></td>
+        <td><%= funcionario.email %></td>
+        <td><%= funcionario.cargo.nome %></td> <!-- Supondo que o Cargo tem um atributo 'nome' -->
+        <td><%= funcionario.status %></td>
+        <td>
+          <%= link_to 'Mostrar', funcionario_path(funcionario), class: 'btn btn-info' %>
+          <%= link_to 'Editar', edit_funcionario_path(funcionario), class: 'btn btn-warning' %>
+          <%= link_to 'Excluir', funcionario_path(funcionario), method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -8,7 +8,7 @@ class CreateFuncionarios < ActiveRecord::Migration[7.2]
       t.string :rg
       t.string :telefone
       t.string :email
-      t.string :cargo
+      t.references :cargo, null: false, foreign_key: true
       t.date :data_contratacao
       t.decimal :salario
       t.string :status
