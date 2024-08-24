@@ -9,7 +9,7 @@
 </p>
 <p>
   <strong>Nível:</strong>
-  <%= @cargo.nivel.humanize %>
+  <%= @cargo.nivel %>
 </p>
 <p>
   <strong>Salário Base:</strong>
@@ -25,7 +25,7 @@
 </p>
 <p>
   <strong>Status:</strong>
-  <%= @cargo.status.humanize %>
+  <%= @cargo.status %>
 </p>
 <%= link_to 'Editar', edit_cargo_path(@cargo) %> |
 <%= link_to 'Voltar', cargos_path %>

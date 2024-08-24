@@ -57,14 +57,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_17_120940) do
     t.string "rg"
     t.string "telefone"
     t.string "email"
-    t.string "cargo"
+    t.integer "cargo_id", null: false
     t.date "data_contratacao"
     t.decimal "salario"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cargo_id"], name: "index_funcionarios_on_cargo_id"
   end
 
   add_foreign_key "cargos", "departamentos"
   add_foreign_key "enderecos", "funcionarios"
+  add_foreign_key "funcionarios", "cargos"
 end
