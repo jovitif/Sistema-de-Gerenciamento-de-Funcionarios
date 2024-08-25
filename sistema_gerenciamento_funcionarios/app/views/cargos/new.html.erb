@@ -1,76 +1,49 @@
-<!-- app/views/funcionarios/new.html.erb -->
+<h1>Novo Cargo</h1>
 
-<h1> Novo Funcionário </h1>
+<%= form_with(model: @cargo, local: true) do |form| %>
+  <div>
+    <%= form.label :nome %>
+    <%= form.text_field :nome %>
+  </div>
+  
+  <div>
+    <%= form.label :descricao %>
+    <%= form.text_area :descricao %>
+  </div>
 
-<%= form_with(model: @funcionario, local: true) do |form| %>
   <div>
-    <%= form.label :nome_completo %>
-    <%= form.text_field :nome_completo %>
+    <%= form.label :departamento_id, "Departamento" %>
+    <%= form.collection_select :departamento_id, Departamento.all, :id, :nome, prompt: "Selecione um departamento" %>
   </div>
   <div>
-    <%= form.label :cpf %>
-    <%= form.text_field :cpf %>
-  </div>
+  <%= form.label :nivel %>
+  <%= form.select :nivel, Cargo.nivels.keys.map { |s| [s.humanize, s] }, prompt: "Selecione um nível" %>
+</div>
+
+
   <div>
-    <%= form.label :email %>
-    <%= form.email_field :email %>
+    <%= form.label :salario_base %>
+    <%= form.number_field :salario_base, step: '0.01' %>
   </div>
+
   <div>
-    <%= form.label :data_nascimento %>
-    <%= form.date_field :data_nascimento %>
+    <%= form.label :requisitos %>
+    <%= form.text_area :requisitos %>
   </div>
+
   <div>
-    <%= form.label :data_contratacao %>
-    <%= form.date_field :data_contratacao %>
+    <%= form.label :beneficios %>
+    <%= form.text_area :beneficios %>
   </div>
-  <div>
-    <%= form.label :salario %>
-    <%= form.number_field :salario, step: 0.01 %>
-  </div>
+
   <div>
     <%= form.label :status %>
-    <%= form.select :status, Funcionario.statuses.keys.map { |s| [s.humanize, s] } %>
-  </div>
-  <div>
-    <%= form.label :cargo_id, "Cargo" %>
-    <%= form.collection_select :cargo_id, Cargo.all, :id, :nome %>
+    <%= form.select :status, Cargo.statuses.keys.map { |s| [s.humanize, s] } %>
   </div>
 
-  <!-- Campos para endereços -->
-  <h2>Endereços</h2>
-  <%= form.fields_for :enderecos do |endereco_form| %>
-    <div>
-      <%= endereco_form.label :rua %>
-      <%= endereco_form.text_field :rua %>
-    </div>
-    <div>
-      <%= endereco_form.label :numero %>
-      <%= endereco_form.text_field :numero %>
-    </div>
-    <div>
-      <%= endereco_form.label :bairro %>
-      <%= endereco_form.text_field :bairro %>
-    </div>
-    <div>
-      <%= endereco_form.label :cidade %>
-      <%= endereco_form.text_field :cidade %>
-    </div>
-    <div>
-      <%= endereco_form.label :estado %>
-      <%= endereco_form.text_field :estado %>
-    </div>
-    <div>
-      <%= endereco_form.label :cep %>
-      <%= endereco_form.text_field :cep %>
-    </div>
-    <div>
-      <%= link_to 'Remover Endereço', '#', class: 'remove_fields' %>
-    </div>
-  <% end %>
-
   <div>
-    <%= form.submit 'Salvar' %>
+    <%= form.submit 'Salvar Cargo' %>
   </div>
 <% end %>
 
-<%= link_to 'Voltar', funcionarios_path %>
+<%= link_to 'Voltar', cargos_path %>

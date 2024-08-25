@@ -25,7 +25,8 @@
 </p>
 <p>
   <strong>Status:</strong>
-  <%= @cargo.status %>
+  <%= @cargo.status.humanize %>
 </p>
 <%= link_to 'Editar', edit_cargo_path(@cargo) %> |
 <%= link_to 'Voltar', cargos_path %>
+

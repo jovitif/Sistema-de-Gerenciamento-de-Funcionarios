@@ -46,5 +46,6 @@ class CargosController < ApplicationController
   def cargo_params
     params.require(:cargo).permit(:nome, :descricao, :departamento_id, :nivel, :salario_base, :requisitos, :beneficios, :status)
   end
+  
 end
 

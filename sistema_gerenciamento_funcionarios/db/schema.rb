@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_17_120940) do
     t.string "nome"
     t.text "descricao"
     t.integer "departamento_id", null: false
-    t.string "nivel"
+    t.integer "nivel", default: 0
     t.decimal "salario_base", precision: 10, scale: 2
     t.text "requisitos"
     t.text "beneficios"

@@ -4,7 +4,7 @@ class CreateCargos < ActiveRecord::Migration[7.2]
       t.string :nome
       t.text :descricao
       t.references :departamento, null: false, foreign_key: true
-      t.string :nivel
+      t.integer :nivel, default: 0
       t.decimal :salario_base, precision: 10, scale: 2
       t.text :requisitos
       t.text :beneficios
