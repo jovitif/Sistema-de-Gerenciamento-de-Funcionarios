@@ -33,9 +33,11 @@ class DepartamentosController < ApplicationController
   end
 
   def destroy
+    @departamento = Departamento.find(params[:id])
     @departamento.destroy
     redirect_to departamentos_url, notice: 'Departamento excluído com sucesso.'
   end
+  
 
   private
 
