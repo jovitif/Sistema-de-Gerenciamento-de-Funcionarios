@@ -1,5 +1,17 @@
 <h1>Departamentos</h1>
+
+<%= form_with url: departamentos_path, method: :get, local: true do %>
+  <div class="field">
+    <%= label_tag :nome, 'Nome do Departamento' %>
+    <%= text_field_tag :nome, params[:nome] %>
+  </div>
+  <div class="actions">
+    <%= submit_tag 'Buscar' %>
+  </div>
+<% end %>
+
 <%= link_to 'Novo Departamento', new_departamento_path %>
+
 <table>
   <thead>
     <tr>
@@ -23,9 +35,8 @@
           <%= link_to 'Mostrar', departamento %> |
           <%= link_to 'Editar', edit_departamento_path(departamento) %> |
           <%= link_to 'Excluir', departamento, method: :delete, data: { confirm: 'Tem certeza?' } %>
-          </td>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-

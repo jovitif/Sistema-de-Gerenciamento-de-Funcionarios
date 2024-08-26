@@ -2,7 +2,11 @@ class DepartamentosController < ApplicationController
   before_action :set_departamento, only: %i[show edit update destroy]
 
   def index
-    @departamentos = Departamento.all
+    if params[:nome].present?
+      @departamentos = Departamento.where('nome LIKE ?', "%#{params[:nome]}%")
+    else
+      @departamentos = Departamento.all
+    end
   end
 
   def show
