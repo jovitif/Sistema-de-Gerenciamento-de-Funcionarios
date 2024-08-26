@@ -6,7 +6,11 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios
   # GET /funcionarios.json
   def index
-    @funcionarios = Funcionario.all
+    if params[:nome].present?
+      @funcionarios = Funcionario.where('nome_completo LIKE ?', "%#{params[:nome]}%")
+    else
+      @funcionarios = Funcionario.all
+    end
   end
 
   # GET /funcionarios/1
@@ -30,6 +34,8 @@ class FuncionariosController < ApplicationController
       render :new
     end
   end
+  
+  
 
   # GET /funcionarios/1/edit
   def edit
@@ -64,7 +70,7 @@ class FuncionariosController < ApplicationController
 def funcionario_params
   params.require(:funcionario).permit(
     :nome_completo, :cpf, :email, :data_nascimento, :data_contratacao, :salario, :status, :cargo_id,
-    :genero, :rg, :telefone, # Adicione estes parâmetros
+    :genero, :rg, :telefone, 
     enderecos_attributes: [:id, :rua, :numero, :bairro, :cidade, :estado, :cep, :_destroy]
   )
 end

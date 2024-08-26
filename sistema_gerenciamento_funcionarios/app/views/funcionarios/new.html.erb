@@ -90,11 +90,11 @@
         <%= endereco_form.text_field :cep, class: 'form-control' %>
       </div>
 
-      <%= link_to 'Remover Endereço', '#', class: 'remove_fields', data: {id: endereco_form.object.id} %>
     <% end %>
   </div>
 
-  <%= form.submit 'Criar Funcionário', class: 'btn btn-primary' %>
+  <div>
+    <%= form.submit %>
+  </div>
 <% end %>
-
 <%= link_to 'Voltar', funcionarios_path, class: 'btn btn-secondary' %>
