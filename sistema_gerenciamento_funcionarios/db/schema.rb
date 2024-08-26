@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_25_183109) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_26_121401) do
   create_table "cargos", force: :cascade do |t|
     t.string "nome"
     t.text "descricao"
     t.integer "departamento_id", null: false
-    t.string "nivel"
+    t.integer "nivel"
     t.decimal "salario_base", precision: 10, scale: 2
     t.text "requisitos"
     t.text "beneficios"
