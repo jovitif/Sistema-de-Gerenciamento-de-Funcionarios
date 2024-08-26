@@ -2,7 +2,11 @@ class CargosController < ApplicationController
   before_action :set_cargo, only: %i[show edit update destroy]
 
   def index
-    @cargos = Cargo.all
+    if params[:nome].present?
+      @cargos = Cargo.where('nome LIKE ?', "%#{params[:nome]}%")
+    else
+      @cargos = Cargo.all
+    end
   end
 
   def show

@@ -1,4 +1,15 @@
 <h1>Cargos</h1>
+
+<%= form_with url: cargos_path, method: :get, local: true do %>
+  <div class="field">
+    <%= label_tag :nome, 'Nome do Cargo' %>
+    <%= text_field_tag :nome, params[:nome] %>
+  </div>
+  <div class="actions">
+    <%= submit_tag 'Buscar' %>
+  </div>
+<% end %>
+
 <%= link_to 'Novo Cargo', new_cargo_path %>
 <table>
   <thead>
