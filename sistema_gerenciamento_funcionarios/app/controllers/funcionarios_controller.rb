@@ -60,10 +60,13 @@ class FuncionariosController < ApplicationController
   end
 
   # Only allow a list of trusted parameters through.
-  def funcionario_params
-    params.require(:funcionario).permit(
-      :nome_completo, :cpf, :email, :data_nascimento, :data_contratacao, :salario, :status, :cargo_id,
-      enderecos_attributes: [:id, :rua, :numero, :bairro, :cidade, :estado, :cep, :_destroy]
-    )
-  end
+  # app/controllers/funcionarios_controller.rb
+def funcionario_params
+  params.require(:funcionario).permit(
+    :nome_completo, :cpf, :email, :data_nascimento, :data_contratacao, :salario, :status, :cargo_id,
+    :genero, :rg, :telefone, # Adicione estes parâmetros
+    enderecos_attributes: [:id, :rua, :numero, :bairro, :cidade, :estado, :cep, :_destroy]
+  )
+end
+
 end
