@@ -2,8 +2,20 @@
 
 <%= form_with url: funcionarios_path, method: :get, local: true do %>
   <div class="field">
-    <%= label_tag :nome, 'Nome do Funcionario' %>
+    <%= label_tag :nome, 'Nome do Funcionário' %>
     <%= text_field_tag :nome, params[:nome] %>
+  </div>
+  <div class="field">
+    <%= label_tag :departamento_id, 'Departamento' %>
+    <%= select_tag :departamento_id, options_from_collection_for_select(Departamento.all, :id, :nome, params[:departamento_id]), include_blank: 'Todos' %>
+  </div>
+  <div class="field">
+    <%= label_tag :data_contratacao_inicio, 'Data de Contratação Início' %>
+    <%= date_field_tag :data_contratacao_inicio, params[:data_contratacao_inicio] %>
+  </div>
+  <div class="field">
+    <%= label_tag :data_contratacao_fim, 'Data de Contratação Fim' %>
+    <%= date_field_tag :data_contratacao_fim, params[:data_contratacao_fim] %>
   </div>
   <div class="actions">
     <%= submit_tag 'Buscar' %>
@@ -36,7 +48,7 @@
         <td><%= funcionario.rg %></td>
         <td><%= funcionario.telefone %></td>
         <td><%= funcionario.email %></td>
-        <td><%= funcionario.cargo.nome %></td> <!-- Supondo que o Cargo tem um atributo 'nome' -->
+        <td><%= funcionario.cargo.nome %></td>
         <td><%= funcionario.status %></td>
         <td>
           <%= link_to 'Mostrar', funcionario_path(funcionario), class: 'btn btn-info' %>

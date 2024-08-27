@@ -6,10 +6,26 @@ class FuncionariosController < ApplicationController
   # GET /funcionarios
   # GET /funcionarios.json
   def index
-    if params[:nome].present?
-      @funcionarios = Funcionario.where('nome_completo LIKE ?', "%#{params[:nome]}%")
-    else
+    def index
       @funcionarios = Funcionario.all
+  
+      # Filtro por nome
+      @funcionarios = @funcionarios.where('nome_completo LIKE ?', "%#{params[:nome]}%") if params[:nome].present?
+  
+      # Filtro por departamento
+      if params[:departamento_id].present?
+        departamento_id = params[:departamento_id].to_i
+        @funcionarios = @funcionarios.joins(cargo: :departamento).where('departamentos.id = ?', departamento_id)
+      end
+  
+      # Filtro por data de contratação
+      if params[:data_contratacao_inicio].present? && params[:data_contratacao_fim].present?
+        @funcionarios = @funcionarios.where('data_contratacao BETWEEN ? AND ?', params[:data_contratacao_inicio], params[:data_contratacao_fim])
+      elsif params[:data_contratacao_inicio].present?
+        @funcionarios = @funcionarios.where('data_contratacao >= ?', params[:data_contratacao_inicio])
+      elsif params[:data_contratacao_fim].present?
+        @funcionarios = @funcionarios.where('data_contratacao <= ?', params[:data_contratacao_fim])
+      end
     end
   end
 
