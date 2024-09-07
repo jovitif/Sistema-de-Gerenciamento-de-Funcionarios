@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
   def update_sanitized_params
-    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:nome, :email, :password, :password_confirmation)}
-    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:nome, :email, :password, :password_confirmation, :current_password)}
+    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:nome, :email, :password, :password_confirmation,role)}
+    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:nome, :email, :password, :password_confirmation, :current_password,role)}
   end
 end
