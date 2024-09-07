@@ -38,7 +38,10 @@
       <th>Ações</th>
     </tr>
   </thead>
+
   <tbody>
+  <% if @funcionarios.present? %>
+
     <% @funcionarios.each do |funcionario| %>
       <tr>
         <td><%= funcionario.nome_completo %></td>
@@ -57,5 +60,10 @@
         </td>
       </tr>
     <% end %>
+    <% else %>
+  <tr>
+    <td colspan="X">Nenhum funcionário encontrado</td> <!-- X sendo o número de colunas -->
+  </tr>
+<% end %>
   </tbody>
 </table>
