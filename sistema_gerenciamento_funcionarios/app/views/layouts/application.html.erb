@@ -10,8 +10,8 @@
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="icon" href="<%= asset_path 'departamentos.png' %>" type="image/png">
+
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -19,9 +19,7 @@
   </head>
 
   <body>
-  <header>
-  <h1>Sistema de Gerenciamento de Funcionários</h1>
-  </header>
+ 
     <% if flash[:notice] %>
       <div class="flash notice">
         <%= flash[:notice] %>
@@ -33,10 +31,7 @@
         <%= flash[:alert] %>
       </div>
     <% end %>
-  <% if user_signed_in? %>
-  <%= link_to "Sair", destroy_user_session_path, method: :delete %>
-  <%= current_user&.email %>
-  <% end %>    
+   
     <%= yield %>
   </body>
 </html>

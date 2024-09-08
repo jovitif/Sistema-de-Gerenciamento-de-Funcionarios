@@ -1,5 +1,6 @@
 class DepartamentosController < ApplicationController
   before_action :set_departamento, only: %i[show edit update destroy]
+  before_action :authorize_departamento
 
   def index
     if params[:nome].present?
@@ -44,6 +45,12 @@ class DepartamentosController < ApplicationController
   
 
   private
+
+  def authorize_departamento
+   # authorize @departamento  # Autoriza a instância, não a classe
+  #  @departamento = Departamento.new  # Cria uma nova instância de Departamento
+  end
+  
 
   def set_departamento
     @departamento = Departamento.find(params[:id])

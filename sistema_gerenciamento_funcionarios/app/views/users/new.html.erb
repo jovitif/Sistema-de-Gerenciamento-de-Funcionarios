@@ -1,0 +1,52 @@
+<h2>Cadastrar Novo Usuário</h2>
+
+<%= form_for(@user) do |f| %>
+  <div class="field">
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  
+  <div class="field">
+  <%= f.label :role %><br />
+  <%= f.select :role, User.roles.keys.map { |role| [role.humanize, role] }, {}, { onchange: 'updateDepartmentFields()' } %>
+</div>
+
+<div class="field" id="department-fields">
+  <%= f.label :departamento_ids, "Departamentos" %><br />
+  <%= f.collection_check_boxes :departamento_ids, Departamento.all, :id, :nome %>
+</div>
+
+  <div class="actions">
+    <%= f.submit "Cadastrar Usuário" %>
+  </div>
+<% end %>
+
+<script>
+  function updateDepartmentFields() {
+    var role = document.querySelector('[name="user[role]"]').value;
+    var departmentFields = document.getElementById('department-fields');
+    if (role === 'admin') {
+      departmentFields.style.display = 'none';
+    } else {
+      departmentFields.style.display = 'block';
+    }
+  }
+
+  // Initialize visibility based on the default value
+  document.addEventListener('DOMContentLoaded', updateDepartmentFields);
+</script>

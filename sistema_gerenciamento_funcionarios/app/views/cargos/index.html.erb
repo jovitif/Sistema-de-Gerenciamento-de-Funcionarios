@@ -10,7 +10,12 @@
   </div>
 <% end %>
 
-<%= link_to 'Novo Cargo', new_cargo_path %>
+<div class="centralizado">
+  <%= link_to 'Novo Cargo', new_cargo_path %>
+  <%= link_to 'Menu', selection_path, class: "btn btn-primary" %>
+</div>
+
+
 <table>
   <thead>
     <tr>
@@ -41,4 +46,3 @@
     <% end %>
   </tbody>
 </table>
-

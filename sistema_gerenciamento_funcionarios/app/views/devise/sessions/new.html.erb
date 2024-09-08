@@ -1,26 +1,39 @@
-<h2>Log in</h2>
+<h2 style="text-align: center;">Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <div style="display: flex; flex-direction: row; align-items: center; border: 1px solid #ddd; padding: 40px; border-radius: 8px; background-color: #f9f9f9; width: 80%; max-width: 1200px;">
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <!-- Logo da Prefeitura -->
+    <div style="flex: 1; display: flex; justify-content: center; margin-right: 20px;">
+      <%= image_tag 'logoprefeitura.jpg', alt: 'Logo da Prefeitura', style: 'max-width: 100%; height: auto;' %>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <!-- Formulário de Login -->
+    <div style="flex: 2;">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", style: 'width: 100%;' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password", style: 'width: 100%;' %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="field">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "ENTRAR", style: 'width: 100%;' %>
+        </div>
+
+        <%= link_to "Esqueceu a sua senha?", new_password_path(resource_name) %><br />
+      <% end %>
+    </div>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

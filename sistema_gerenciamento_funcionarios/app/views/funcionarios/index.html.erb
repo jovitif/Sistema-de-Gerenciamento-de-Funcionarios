@@ -22,7 +22,11 @@
   </div>
 <% end %>
 
-<%= link_to 'Novo Funcionário', new_funcionario_path, class: 'btn btn-primary' %>
+<div class="centralizado">
+  <%= link_to 'Novo Funcionário', new_funcionario_path %>
+  <%= link_to 'Menu', selection_path, class: "btn btn-primary" %>
+</div>
+
 
 <table class="table">
   <thead>
@@ -67,3 +71,5 @@
 <% end %>
   </tbody>
 </table>
+
+

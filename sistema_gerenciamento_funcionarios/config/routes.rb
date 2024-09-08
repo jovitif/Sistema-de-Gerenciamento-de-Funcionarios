@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
+ 
 
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
@@ -18,6 +22,10 @@ Rails.application.routes.draw do
   resources :funcionarios
   resources :departamentos
   resources :cargos
+  resources :users, only: [:new, :create]
+
+
+  get 'selection', to: 'pages#selection'
 
   get "/funcionarios", to: "funcionarios#index"
   get "/funcionarios/:id", to: "funcionarios#show"
