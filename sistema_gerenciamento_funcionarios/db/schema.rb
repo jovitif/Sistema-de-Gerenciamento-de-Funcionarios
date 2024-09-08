@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_07_230135) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_07_233617) do
   create_table "cargos", force: :cascade do |t|
     t.string "nome"
     t.text "descricao"
@@ -66,6 +66,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_07_230135) do
     t.index ["cargo_id"], name: "index_funcionarios_on_cargo_id"
   end
 
+  create_table "user_departamentos", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "departamento_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["departamento_id"], name: "index_user_departamentos_on_departamento_id"
+    t.index ["user_id"], name: "index_user_departamentos_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -87,4 +96,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_07_230135) do
   add_foreign_key "cargos", "departamentos"
   add_foreign_key "enderecos", "funcionarios"
   add_foreign_key "funcionarios", "cargos"
+  add_foreign_key "user_departamentos", "departamentos"
+  add_foreign_key "user_departamentos", "users"
 end

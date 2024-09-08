@@ -26,11 +26,15 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <!-- Campo de seleção de role -->
   <div class="field">
-    <%= f.label :role %><br />
-    <%= f.select :role, User.roles.keys.map { |role| [role.titleize, role] } %>
-  </div>
+  <%= f.label :role %><br />
+  <%= f.select :role, User.roles.keys.map { |role| [role.humanize, role] }, {}, { onchange: 'updateDepartmentFields()' } %>
+</div>
+
+<div class="field" id="department-fields">
+  <%= f.label :departamento_ids, "Departamentos" %><br />
+  <%= f.collection_check_boxes :departamento_ids, Departamento.all, :id, :nome %>
+</div>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
@@ -38,4 +42,19 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+<script>
+  function updateDepartmentFields() {
+    var role = document.querySelector('[name="user[role]"]').value;
+    var departmentFields = document.getElementById('department-fields');
+    if (role === 'admin') {
+      departmentFields.style.display = 'none';
+    } else {
+      departmentFields.style.display = 'block';
+    }
+  }
+
+  // Initialize visibility based on the default value
+  document.addEventListener('DOMContentLoaded', updateDepartmentFields);
+</script>
 
