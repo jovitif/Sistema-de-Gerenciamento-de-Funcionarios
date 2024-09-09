@@ -1,6 +1,6 @@
 <h2>Cadastrar Novo Usuário</h2>
 
-<%= form_for(@user) do |f| %>
+<%= form_for @user, url: users_admin_index_path(@user)  do |f| %> 
   <div class="field">
     <%= f.label :nome %><br />
     <%= f.text_field :nome %>
@@ -22,14 +22,14 @@
   </div>
   
   <div class="field">
-  <%= f.label :role %><br />
-  <%= f.select :role, User.roles.keys.map { |role| [role.humanize, role] }, {}, { onchange: 'updateDepartmentFields()' } %>
-</div>
+    <%= f.label :role %><br />
+    <%= f.select :role, User.roles.keys.map { |role| [role.humanize, role] }, {}, { onchange: 'updateDepartmentFields()' } %>
+  </div>
 
-<div class="field" id="department-fields">
-  <%= f.label :departamento_ids, "Departamentos" %><br />
-  <%= f.collection_check_boxes :departamento_ids, Departamento.all, :id, :nome %>
-</div>
+  <div class="field" id="department-fields">
+    <%= f.label :departamento_ids, "Departamentos" %><br />
+    <%= f.collection_check_boxes :departamento_ids, Departamento.all, :id, :nome %>
+  </div>
 
   <div class="actions">
     <%= f.submit "Cadastrar Usuário" %>
@@ -47,6 +47,5 @@
     }
   }
 
-  // Initialize visibility based on the default value
   document.addEventListener('DOMContentLoaded', updateDepartmentFields);
 </script>

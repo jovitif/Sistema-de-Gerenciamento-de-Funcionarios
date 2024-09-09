@@ -47,15 +47,15 @@
     <% end %>
   </div>
 
-  <!-- Mostrar card de cadastro de usuário apenas para admins -->
   <% if current_user.admin? %>
-    <div class="card" style="border: 1px solid #ddd; padding: 20px; text-align: center; width: 200px;">
-      <%= link_to new_user_path , style: "text-decoration: none;" do %>
-        <%= image_tag 'user.png', alt: 'Cadastrar Usuário', style: 'width: 100%; height: auto;' %>
-        <h2>Usuários</h2>
-      <% end %>
-    </div>
-  <% end %>
+  <div class="card" style="border: 1px solid #ddd; padding: 20px; text-align: center; width: 200px;">
+    <%= link_to users_path , style: "text-decoration: none;" do %> <!-- Redireciona para a lista de usuários -->
+      <%= image_tag 'user.png', alt: 'Usuários', style: 'width: 100%; height: auto;' %>
+      <h2>Usuários</h2>
+    <% end %>
+  </div>
+<% end %>
+
 
 </div>
 

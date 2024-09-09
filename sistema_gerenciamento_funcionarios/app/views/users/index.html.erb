@@ -1,0 +1,40 @@
+<h1>Usuários</h1>
+
+<div class="centralizado">
+  <%= link_to 'Novo Usuário', new_user_path, class: 'btn btn-primary' %>
+  <%= link_to 'Menu', selection_path, class: "btn btn-primary" %>
+</div>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Nível de Acesso</th>
+      <th>Departamentos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.nome %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role.humanize %></td>
+        <td>
+          <% if user.departamentos.any? %>
+            <ul>
+              <% user.departamentos.each do |departamento| %>
+                <li><%= departamento.nome %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            Nenhum
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

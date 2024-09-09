@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  #devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users  
+  resources :users_admin, :controller => 'users'
+  
   devise_scope :user do
     root to: "devise/sessions#new"
   end
@@ -22,8 +25,10 @@ Rails.application.routes.draw do
   resources :funcionarios
   resources :departamentos
   resources :cargos
-  resources :users, only: [:new, :create]
+  resources :users, only: [:index, :new, :create]
 
+
+  resources :admin_users, controller: 'users', only: [:index, :new, :create]
 
   get 'selection', to: 'pages#selection'
 
