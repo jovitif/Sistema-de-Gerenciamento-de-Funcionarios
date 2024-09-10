@@ -1,36 +1,43 @@
-# app/controllers/funcionarios_controller.rb
-
 class FuncionariosController < ApplicationController
   before_action :set_funcionario, only: %i[show edit update destroy]
+  before_action :set_departamentos_e_cargos, only: %i[new create edit update]
+
 
   # GET /funcionarios
-  # GET /funcionarios.json
   def index
-    def index
-      @funcionarios = Funcionario.all
-  
-      # Filtro por nome
-      @funcionarios = @funcionarios.where('nome_completo LIKE ?', "%#{params[:nome]}%") if params[:nome].present?
-  
-      # Filtro por departamento
-      if params[:departamento_id].present?
-        departamento_id = params[:departamento_id].to_i
-        @funcionarios = @funcionarios.joins(cargo: :departamento).where('departamentos.id = ?', departamento_id)
-      end
-  
-      # Filtro por data de contratação
-      if params[:data_contratacao_inicio].present? && params[:data_contratacao_fim].present?
-        @funcionarios = @funcionarios.where('data_contratacao BETWEEN ? AND ?', params[:data_contratacao_inicio], params[:data_contratacao_fim])
-      elsif params[:data_contratacao_inicio].present?
-        @funcionarios = @funcionarios.where('data_contratacao >= ?', params[:data_contratacao_inicio])
-      elsif params[:data_contratacao_fim].present?
-        @funcionarios = @funcionarios.where('data_contratacao <= ?', params[:data_contratacao_fim])
-      end
+    # Obter todos os funcionários
+    @funcionarios = Funcionario.all
+
+    # Obter os departamentos associados ao usuário logado
+    if current_user.admin?
+      @departamentos = Departamento.all
+    else
+      @departamentos = current_user.departamentos
+    end
+
+    # Filtro por nome do funcionário
+    @funcionarios = @funcionarios.where('nome_completo LIKE ?', "%#{params[:nome]}%") if params[:nome].present?
+
+    # Filtro por departamento, apenas os departamentos aos quais o usuário tem acesso
+    if params[:departamento_id].present?
+      departamento_id = params[:departamento_id].to_i
+      @funcionarios = @funcionarios.joins(cargo: :departamento).where('departamentos.id = ?', departamento_id)
+    else
+      # Mostrar funcionários apenas dos departamentos associados ao usuário
+      @funcionarios = @funcionarios.joins(cargo: :departamento).where(departamentos: { id: @departamentos.pluck(:id) })
+    end
+
+    # Filtro por data de contratação
+    if params[:data_contratacao_inicio].present? && params[:data_contratacao_fim].present?
+      @funcionarios = @funcionarios.where('data_contratacao BETWEEN ? AND ?', params[:data_contratacao_inicio], params[:data_contratacao_fim])
+    elsif params[:data_contratacao_inicio].present?
+      @funcionarios = @funcionarios.where('data_contratacao >= ?', params[:data_contratacao_inicio])
+    elsif params[:data_contratacao_fim].present?
+      @funcionarios = @funcionarios.where('data_contratacao <= ?', params[:data_contratacao_fim])
     end
   end
 
   # GET /funcionarios/1
-  # GET /funcionarios/1.json
   def show
   end
 
@@ -41,7 +48,6 @@ class FuncionariosController < ApplicationController
   end
 
   # POST /funcionarios
-  # POST /funcionarios.json
   def create
     @funcionario = Funcionario.new(funcionario_params)
     if @funcionario.save
@@ -50,15 +56,12 @@ class FuncionariosController < ApplicationController
       render :new
     end
   end
-  
-  
 
   # GET /funcionarios/1/edit
   def edit
   end
 
   # PATCH/PUT /funcionarios/1
-  # PATCH/PUT /funcionarios/1.json
   def update
     if @funcionario.update(funcionario_params)
       redirect_to @funcionario, notice: 'Funcionário atualizado com sucesso.'
@@ -68,7 +71,6 @@ class FuncionariosController < ApplicationController
   end
 
   # DELETE /funcionarios/1
-  # DELETE /funcionarios/1.json
   def destroy
     @funcionario.destroy
     redirect_to funcionarios_url, notice: 'Funcionário excluído com sucesso.'
@@ -76,19 +78,28 @@ class FuncionariosController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
+  def set_departamentos_e_cargos
+    if current_user.admin?
+      @departamentos = Departamento.all
+      @cargos = Cargo.all
+    else
+      # Filtra departamentos e cargos de acordo com o usuário
+      @departamentos = current_user.departamentos
+      @cargos = Cargo.where(departamento_id: @departamentos.pluck(:id))
+    end
+  end
+
+  # Define o funcionário com base no id
   def set_funcionario
     @funcionario = Funcionario.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
-  # app/controllers/funcionarios_controller.rb
-def funcionario_params
-  params.require(:funcionario).permit(
-    :nome_completo, :cpf, :email, :data_nascimento, :data_contratacao, :salario, :status, :cargo_id,
-    :genero, :rg, :telefone, 
-    enderecos_attributes: [:id, :rua, :numero, :bairro, :cidade, :estado, :cep, :_destroy]
-  )
-end
-
+  # Permite parâmetros confiáveis
+  def funcionario_params
+    params.require(:funcionario).permit(
+      :nome_completo, :cpf, :email, :data_nascimento, :data_contratacao, :salario, :status, :cargo_id,
+      :genero, :rg, :telefone, 
+      enderecos_attributes: [:id, :rua, :numero, :bairro, :cidade, :estado, :cep, :_destroy]
+    )
+  end
 end

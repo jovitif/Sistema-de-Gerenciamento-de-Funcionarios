@@ -36,9 +36,10 @@
     <%= form.email_field :email, class: 'form-control' %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :cargo_id %>
-    <%= form.collection_select :cargo_id, Cargo.all, :id, :nome, prompt: 'Selecione um Cargo', class: 'form-control' %>
+
+  <div class="field">
+    <%= form.label :cargo_id, 'Cargo' %>
+    <%= form.select :cargo_id, options_from_collection_for_select(@cargos, :id, :nome, @funcionario.cargo_id), { prompt: 'Selecione o Cargo' } %>
   </div>
 
   <div class="form-group">

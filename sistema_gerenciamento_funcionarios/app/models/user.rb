@@ -16,6 +16,16 @@ class User < ApplicationRecord
     self.role ||= :gestor_rh
   end
 
+  def admin?
+    # Retorne true se o usuário for administrador
+    self.role == 'admin'
+  end
+
+  def departamentos_permitidos
+    # Liste os departamentos que o usuário pode gerenciar (ajuste de acordo com sua lógica)
+    self.departamentos
+  end
+
     # Callback to assign all departments to admin users
     before_save :assign_departments_for_admin
 

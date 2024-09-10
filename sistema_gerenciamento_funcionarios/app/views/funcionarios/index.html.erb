@@ -5,22 +5,27 @@
     <%= label_tag :nome, 'Nome do Funcionário' %>
     <%= text_field_tag :nome, params[:nome] %>
   </div>
+  
   <div class="field">
     <%= label_tag :departamento_id, 'Departamento' %>
-    <%= select_tag :departamento_id, options_from_collection_for_select(Departamento.all, :id, :nome, params[:departamento_id]), include_blank: 'Todos' %>
+    <%= select_tag :departamento_id, options_from_collection_for_select(@departamentos, :id, :nome, params[:departamento_id]), include_blank: 'Todos' %>
   </div>
+  
   <div class="field">
     <%= label_tag :data_contratacao_inicio, 'Data de Contratação Início' %>
     <%= date_field_tag :data_contratacao_inicio, params[:data_contratacao_inicio] %>
   </div>
+  
   <div class="field">
     <%= label_tag :data_contratacao_fim, 'Data de Contratação Fim' %>
     <%= date_field_tag :data_contratacao_fim, params[:data_contratacao_fim] %>
   </div>
+
   <div class="actions">
     <%= submit_tag 'Buscar' %>
   </div>
 <% end %>
+
 
 <div class="centralizado">
   <%= link_to 'Novo Funcionário', new_funcionario_path %>

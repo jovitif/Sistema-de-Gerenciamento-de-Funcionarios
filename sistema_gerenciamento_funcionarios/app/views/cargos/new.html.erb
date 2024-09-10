@@ -12,9 +12,9 @@
   </div>
 
   <div>
-    <%= form.label :departamento_id, "Departamento" %>
-    <%= form.collection_select :departamento_id, Departamento.all, :id, :nome, prompt: "Selecione um departamento" %>
-  </div>
+  <%= form.label :departamento_id, "Departamento" %>
+  <%= form.collection_select :departamento_id, @departamentos, :id, :nome, prompt: "Selecione um departamento" %>
+</div>
 
   
   <div>
