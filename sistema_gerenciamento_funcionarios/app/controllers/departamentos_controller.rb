@@ -3,14 +3,26 @@ class DepartamentosController < ApplicationController
   before_action :authorize_departamento
 
   def index
-    if params[:nome].present?
-      @departamentos = Departamento.where('nome LIKE ?', "%#{params[:nome]}%")
-    else
-      @departamentos = Departamento.all
+    if current_user.admin?
+      # Admin vê todos os departamentos
+      if params[:nome].present?
+        @departamentos = Departamento.where('nome LIKE ?', "%#{params[:nome]}%")
+      else
+        @departamentos = Departamento.all
+      end
+    elsif current_user.gestor_rh?
+      # Gestor de RH vê apenas os departamentos associados
+      if params[:nome].present?
+        @departamentos = current_user.departamentos.where('nome LIKE ?', "%#{params[:nome]}%")
+      else
+        @departamentos = current_user.departamentos
+      end
     end
   end
 
   def show
+    @departamento = Departamento.find(params[:id])
+    authorize @departamento
   end
 
   def new

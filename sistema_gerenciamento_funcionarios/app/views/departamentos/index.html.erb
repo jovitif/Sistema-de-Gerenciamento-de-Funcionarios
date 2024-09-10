@@ -11,10 +11,12 @@
 <% end %>
 
 <div class="centralizado">
-  <%= link_to 'Novo Departamento', new_departamento_path %>
+  <% if policy(Departamento).create? %> <!-- Apenas admin pode ver o botão de novo departamento -->
+    <%= link_to 'Novo Departamento', new_departamento_path %>
+  <% end %>
+
   <%= link_to 'Menu', selection_path, class: "btn btn-primary" %>
 </div>
-
 
 <table>
   <thead>
@@ -29,18 +31,24 @@
   </thead>
   <tbody>
     <% @departamentos.each do |departamento| %>
-      <tr>
-        <td><%= departamento.nome %></td>
-        <td><%= departamento.descricao %></td>
-        <td><%= departamento.codigo %></td>
-        <td><%= departamento.localizacao %></td>
-        <td><%= departamento.status %></td>
-        <td>
-          <%= link_to 'Mostrar', departamento %> |
-          <%= link_to 'Editar', edit_departamento_path(departamento) %> |
-          <%= link_to 'Excluir', departamento, method: :delete, data: { confirm: 'Tem certeza?' } %>
-        </td>
-      </tr>
+      <% if policy(departamento).show? %> <!-- Apenas mostra departamentos para quem tem permissão -->
+        <tr>
+          <td><%= departamento.nome %></td>
+          <td><%= departamento.descricao %></td>
+          <td><%= departamento.codigo %></td>
+          <td><%= departamento.localizacao %></td>
+          <td><%= departamento.status %></td>
+          <td>
+            <%= link_to 'Mostrar', departamento if policy(departamento).show? %> 
+            <% if policy(departamento).update? %>
+              | <%= link_to 'Editar', edit_departamento_path(departamento) %>
+            <% end %>
+            <% if policy(departamento).destroy? %>
+              | <%= link_to 'Excluir', departamento, method: :delete, data: { confirm: 'Tem certeza?' } %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

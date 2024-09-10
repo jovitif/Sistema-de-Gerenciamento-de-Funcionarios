@@ -15,6 +15,8 @@
     <%= form.label :departamento_id, "Departamento" %>
     <%= form.collection_select :departamento_id, Departamento.all, :id, :nome, prompt: "Selecione um departamento" %>
   </div>
+
+  
   <div>
   <%= form.label :nivel %>
   <%= form.select :nivel, Cargo.nivels.keys.map { |s| [s.humanize, s] }, prompt: "Selecione um nível" %>

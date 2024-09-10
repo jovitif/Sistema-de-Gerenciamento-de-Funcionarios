@@ -11,7 +11,7 @@ class DepartamentoPolicy
     end
   
     def show?
-      user.admin?
+      user.admin? || user.gestor_rh?
     end
   
     def create?
