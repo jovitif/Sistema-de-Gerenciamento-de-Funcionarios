@@ -1,32 +1,99 @@
-<h1><%= @cargo.nome %></h1>
-<p>
-  <strong>Descrição:</strong>
-  <%= @cargo.descricao %>
-</p>
-<p>
-  <strong>Departamento:</strong>
-  <%= @cargo.departamento.nome %>
-</p>
-<p>
-  <strong>Nível:</strong>
-  <%= @cargo.nivel %>
-</p>
-<p>
-  <strong>Salário Base:</strong>
-  <%= number_to_currency(@cargo.salario_base) %>
-</p>
-<p>
-  <strong>Requisitos:</strong>
-  <%= @cargo.requisitos %>
-</p>
-<p>
-  <strong>Benefícios:</strong>
-  <%= @cargo.beneficios %>
-</p>
-<p>
-  <strong>Status:</strong>
-  <%= @cargo.status.humanize %>
-</p>
-
-<%= link_to 'Voltar', cargos_path %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detalhes do Cargo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .card h1 {
+      margin-top: 0;
+      font-size: 2rem;
+      color: #343a40;
+    }
+    .card p {
+      font-size: 1rem;
+      margin: 10px 0;
+      color: #495057;
+    }
+    .card strong {
+      color: #212529;
+    }
+    .button-container {
+      margin-top: 20px;
+    }
+    .button-container a {
+      text-decoration: none;
+      color: white;
+      background-color: #007bff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    .button-container a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1><%= @cargo.nome %></h1>
+      <p>
+        <strong>Descrição:</strong>
+        <br>
+        <%= @cargo.descricao %>
+      </p>
+      <p>
+        <strong>Departamento:</strong>
+        <br>
+        <%= @cargo.departamento.nome %>
+      </p>
+      <p>
+        <strong>Nível:</strong>
+        <br>
+        <%= @cargo.nivel %>
+      </p>
+      <p>
+        <strong>Salário Base:</strong>
+        <br>
+        <%= number_to_currency(@cargo.salario_base) %>
+      </p>
+      <p>
+        <strong>Requisitos:</strong>
+        <br>
+        <%= @cargo.requisitos %>
+      </p>
+      <p>
+        <strong>Benefícios:</strong>
+        <br>
+        <%= @cargo.beneficios %>
+      </p>
+      <p>
+        <strong>Status:</strong>
+        <br>
+        <%= @cargo.status.humanize %>
+      </p>
+      <div class="button-container">
+        <%= link_to 'Voltar', cargos_path, class: 'btn' %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
 

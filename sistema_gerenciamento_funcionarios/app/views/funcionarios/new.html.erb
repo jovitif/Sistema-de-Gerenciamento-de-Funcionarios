@@ -13,9 +13,8 @@
 
   <div class="form-group">
     <%= form.label :genero %>
-    <%= form.text_field :genero, class: 'form-control' %>
+    <%= form.select :genero, options_for_select([['Masculino', 'Masculino'], ['Feminino', 'Feminino'], ['Outro', 'Outro']], @funcionario.genero), { prompt: 'Selecione o Gênero' }, class: 'form-control' %>
   </div>
-
   <div class="form-group">
     <%= form.label :cpf %>
     <%= form.text_field :cpf, class: 'form-control' %>
@@ -95,7 +94,7 @@
   </div>
 
   <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit 'Salvar Funcionário' %>
+</div>
 <% end %>
 <%= link_to 'Voltar', funcionarios_path, class: 'btn btn-secondary' %>

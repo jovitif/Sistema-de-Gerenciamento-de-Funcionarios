@@ -22,7 +22,6 @@
   <thead>
     <tr>
       <th>Nome</th>
-      <th>Descrição</th>
       <th>Código</th>
       <th>Localização</th>
       <th>Status</th>
@@ -31,10 +30,9 @@
   </thead>
   <tbody>
     <% @departamentos.each do |departamento| %>
-      <% if policy(departamento).show? %> <!-- Apenas mostra departamentos para quem tem permissão -->
+      <% if policy(departamento).show? %> 
         <tr>
           <td><%= departamento.nome %></td>
-          <td><%= departamento.descricao %></td>
           <td><%= departamento.codigo %></td>
           <td><%= departamento.localizacao %></td>
           <td><%= departamento.status %></td>

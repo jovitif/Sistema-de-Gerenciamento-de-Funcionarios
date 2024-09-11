@@ -1,49 +1,27 @@
-<h1>Novo Cargo</h1>
-
-<%= form_with(model: @cargo, local: true) do |form| %>
+<h1>Novo Departamento</h1>
+<%= form_with(model: @departamento, local: true) do |form| %>
   <div>
     <%= form.label :nome %>
     <%= form.text_field :nome %>
   </div>
-
   <div>
     <%= form.label :descricao %>
     <%= form.text_area :descricao %>
   </div>
-
   <div>
-    <%= form.label :departamento_id, "Departamento" %>
-    <%= form.collection_select :departamento_id, Departamento.all, :id, :nome, prompt: "Selecione um departamento" %>
+    <%= form.label :codigo %>
+    <%= form.text_field :codigo %>
   </div>
-
   <div>
-    <%= form.label :nivel %>
-    <%= form.select :nivel, Cargo.nivels.keys.map { |s| [s.humanize, s] }, prompt: "Selecione um nível" %>
+    <%= form.label :localizacao %>
+    <%= form.text_field :localizacao %>
   </div>
-
-  <div>
-    <%= form.label :salario_base %>
-    <%= form.number_field :salario_base, step: '0.01' %>
-  </div>
-
-  <div>
-    <%= form.label :requisitos %>
-    <%= form.text_area :requisitos %>
-  </div>
-
-  <div>
-    <%= form.label :beneficios %>
-    <%= form.text_area :beneficios %>
-  </div>
-
   <div>
     <%= form.label :status %>
-    <%= form.select :status, Cargo.statuses.keys.map { |s| [s.humanize, s] } %>
+    <%= form.select :status, Departamento.statuses.keys.map { |s| [s.humanize, s] } %>
   </div>
-
   <div>
-    <%= form.submit 'Salvar Cargo' %>
-  </div>
+  <%= form.submit 'Salvar Departamento' %>
+</div>
 <% end %>
-
-<%= link_to 'Voltar', cargos_path %>
+<%= link_to 'Voltar', departamentos_path %>
